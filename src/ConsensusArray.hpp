@@ -21,8 +21,8 @@ public:
      */
     enum State
     {
-        Green,
         Red,
+        Green,
         Blue,
         MAXSTATE,
     };

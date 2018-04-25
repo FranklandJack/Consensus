@@ -12,3 +12,8 @@ program will create and output its data to. Note that if you use the same direct
 name more than once the program will try and create a new unique directory so
 as not to overwrite it - this is glitchy so I suggest either naming a new directory
 each time you animate it, or removing the old directory first then using the same name.
+
+In the output directory you will find a lattice.dat file representing the current state of the file.
+A file which contains the input parameters for this particular simulation.
+A file which contains the fractions of each colour type in the format:
+sweep # | red fraction | green fraction | blue fraction.

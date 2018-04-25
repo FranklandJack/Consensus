@@ -4,7 +4,7 @@
 #include <iomanip>
 
 /**
- *\file 
+ *\file
  *\class ConsensusResults
  *\brief Class for easily handling results of Consensus simulation.
  *
@@ -14,16 +14,10 @@
 class ConsensusResults
 {
 public:
-	/// Order parameter.
-	double orderParameter;
-	/// Order parameter error.
-	double orderParameterError;
-	/// Susceptibility.
-	double susceptibility;
-	/// Susceptibility error.
-	double susceptibilityError;
+	/// Has reached absorbing state.
+	bool absorbingState;
 
-	/** 
+	/**
 	 *\brief operator<< overload for outputting the results.
 	 *\param out std::ostream reference that is the stream being outputted to.
 	 *\param results constant ConsensusResults instance to be output.

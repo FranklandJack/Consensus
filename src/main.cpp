@@ -49,7 +49,7 @@ int main(int argc, char const *argv[])
         ("column-count,c", boost::program_options::value<int>(&rowCount)->default_value(50), "The number of rows in the lattice.")
         ("row-count,r", boost::program_options::value<int>(&colCount)->default_value(50), "The number of columns in the lattice.")
         ("p_1,p", boost::program_options::value<double>(&p_1)->default_value(1), "Value of p_1 in simulation.")
-        ("p_2,p", boost::program_options::value<double>(&p_2)->default_value(1), "Value of p_2 in simulation.")
+        ("p_2,q", boost::program_options::value<double>(&p_2)->default_value(1), "Value of p_2 in simulation.")
         ("sweeps,s", boost::program_options::value<int>(&totalSweeps)->default_value(10000), "The number of sweeps in the simulation.")
         ("output,o",boost::program_options::value<std::string>(&outputName)->default_value(getTimeStamp()), "Name of output directory to save output files into.")
         ("animate,a","Animate the program by printing the current state of the lattice to an output file during simulation")
@@ -144,6 +144,21 @@ int main(int argc, char const *argv[])
 ******************************************** Output/Clean Up *************************************************************
 **************************************************************************************************************************/
 
+   // At the end of the simulation check to see whether the simulation has reached an abosorbing state.
+   bool hasReachedAbsorbingState = (lattice.stateCount(ConsensusArray::Red) == rowCount*colCount)
+     || (lattice.stateCount(ConsensusArray::Green) == rowCount*colCount)
+     || (lattice.stateCount(ConsensusArray::Blue) == rowCount*colCount);
+
+     ConsensusResults results
+     {
+       hasReachedAbsorbingState
+     };
+
+     // Output results to file.
+   	resultsOutput << results << '\n';
+
+    // Output results to command line.
+    std::cout << results << '\n';
 
    // Report how long the program took to execute.
    std::cout << std::setw(30) << std::setfill(' ') << std::left << "Time take to execute(s) =    " <<
